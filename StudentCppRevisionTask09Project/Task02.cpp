@@ -30,5 +30,8 @@
  */
 
 int task02(int a, int b, int c) {
-	return 0;
+	
+	int result = a < b && a > c || a > b && a < c ? a : 0;
+	result = b < a && b > c || b > a && b < c ? b : result;
+	return c < a && c > b || c > a && c < b ? c : result;
 }
