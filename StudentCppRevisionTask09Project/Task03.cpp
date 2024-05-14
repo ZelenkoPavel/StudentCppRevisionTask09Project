@@ -42,5 +42,25 @@
  */
 
 int task03(int month, int year) {
-	return 0;
+	if (month < 1 || month > 12) {
+		return 0;
+	}
+
+	int days;
+
+	if (month == 2) {	
+		days = year % 4 == 0 && year % 100 != 0 || year % 400 == 0
+			? 29 : 28;
+	}
+	else if (month == 4 || month == 6 || month == 9 || month == 11) {
+		days = 30;
+	}
+	else {
+		days = 31;
+	}
+
+	return days;
 }
+
+//В Январе, Марте, Мае, Июле, Августе, Октябре и Декабре - 31 день.В Апреле,
+//Июне, Сентябре и Ноябре - 30 дней.В Феврале - 28 дней, но если год високосный - 29 дней.
