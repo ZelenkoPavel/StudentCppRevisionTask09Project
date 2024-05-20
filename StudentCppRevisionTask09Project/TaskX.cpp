@@ -52,29 +52,75 @@ string taskX(int a1, int b1, int c1, int a2, int b2, int c2) {
 	if (a1 < 1 || b1 < 1 || c1 < 1 || a2 < 1 || b2 < 1 || c2 < 1) {
 		return "Error.";
 	}
+	///////////////////////////////
+	bool exit = true;
 
-	if (a1 == a2 && b1 == b2 && c1 == c2 ||
-		a1 == b2 && b1 == a2 && c1 == c2 ||
-		a1 == c2 && b1 == b2 && c1 == a2 ||
-		a1 == a2 && b1 == c2 && c1 == b1 ||
-		a1 == c2 && b1 == a2 && c1 == b2 ||
-		a1 == b2 && b1 == c2 && c1 == a2) {
+	int* box1 = new int[3];
+	*box1 = a1;
+	*(box1 + 1) = b1;
+	*(box1 + 2) = c1;
+
+	while(exit){
+		exit = false;
+		for (int i = 0; i < 2; i++)
+		{
+			if (*(box1 + i) > *(box1 + i + 1)) {
+				exit = true;
+				int temp = *(box1 + i);
+				*(box1 + i) = *(box1 + i + 1);
+				*(box1 + i + 1) = temp;
+			}
+		}
+	}
+	a1 = *box1;
+	b1 = *(box1 + 1);
+	c1 = *(box1 + 2);
+	delete[] box1;
+	///////////////////////////////
+	exit = true;
+
+	int* box2 = new int[3];
+
+	*box2 = a2;
+	*(box2 + 1) = b2;
+	*(box2 + 2) = c2;
+
+	while (exit) {
+		exit = false;
+		for (int i = 0; i < 2; i++)
+		{
+			if (*(box2 + i) > *(box2 + i + 1)) {
+				exit = true;
+				int temp = *(box2 + i);
+				*(box2 + i) = *(box2 + i + 1);
+				*(box2 + i + 1) = temp;
+			}
+		}
+	}
+	a2 = *box2;
+	b2 = *(box2 + 1);
+	c2 = *(box2 + 2);
+	delete[] box2;
+	///////////////////////////////
+	if (a1 == a2 && b1 == b2 && c1 == c2) {
 		return "Boxes are equal.";
 	}
-	else if (a1 > a2 && b1 == b2 && c1 == c2 ||
-		a1 == a2 && b1 > b2 && c1 == c2 ||
-		a1 == a2 && b1 == b2 && c1 > c2 ||
-		a1 > a2 && b1 > b2 && c1 == c2 ||
-		a1 > a2 && b1 == b2 && c1 > c2 ||
-		a1 == a2 && b1 > b2 && c1 > c2) {
+	else if (a1 > a2 && b1 > b2 && c1 > c2 ||
+			a1 == a2 && b1 > b2 && c1 > c2 ||
+			a1 > a2 && b1 == b2 && c1 > c2 ||
+			a1 > a2 && b1 > b2 && c1 == c2 ||
+			a1 == a2 && b1 == b2 && c1 > c2 ||
+			a1 > a2 && b1 == b2 && c1 == c2 ||
+			a1 == a2 && b1 > b2 && c1 == c2) {
 		return "The first box is larger than the second one.";
 	}
-	else if (a1 < a2 && b1 == b2 && c1 == c2 ||
-		a1 == a2 && b1 < b2 && c1 == c2 ||
-		a1 == a2 && b1 == b2 && c1 < c2 ||
-		a1 < a2 && b1 < b2 && c1 == c2 ||
+	else if (a1 < a2 && b1 < b2 && c1 < c2 ||
+		a1 == a2 && b1 < b2 && c1 < c2 ||
 		a1 < a2 && b1 == b2 && c1 < c2 ||
-		a1 == a2 && b1 < b2 && c1 < c2) {
+		a1 < a2 && b1 < b2 && c1 == c2 ||
+		a1 == a2 && b1 == b2 && c1 < c2 ||
+		a1 < a2 && b1 == b2 && c1 == c2 ||
+		a1 == a2 && b1 < b2 && c1 == c2) {
 		return "The first box is smaller than the second one.";
 	}
 
