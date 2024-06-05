@@ -46,17 +46,20 @@ int task03(int month, int year) {
 		return 0;
 	}
 
+	int result = 0;
 
 	if (month == 2) {	
-		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0
+		result = task01(year)
 			? 29 : 28;
 	}
 	else if (month == 4 || month == 6 || month == 9 || month == 11) {
-		return 30;
+		result = 30;
 	}
 	else {
-		return 31;
+		result = 31;
 	}
+
+	return result;
 }
 
 //В Январе, Марте, Мае, Июле, Августе, Октябре и Декабре - 31 день.В Апреле,
